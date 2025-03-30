@@ -1,12 +1,17 @@
 import React from 'react';
-import DataFetchingComponent from './DataFetchingComponent';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import RocketsList from '*/RocketsList'; 
+import RocketDetailsPage from '*/RocketDetails'; 
 
 function App() {
   return (
-    <div className="App">
-      <h1>Moja aplikacja z Vite + React</h1>
-      <DataFetchingComponent />
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Navigate to="/rockets" />} />
+        <Route path="/rockets" element={<RocketsList />} />
+        <Route path="/rockets/:rocketName" element={<RocketDetailsPage />} />
+      </Routes>
+    </Router>
   );
 }
 
