@@ -1,44 +1,38 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import RocketCard from './RocketCard';
-import './RocketsList.css';
-import useSWR from 'swr';
 import RocketDetails from './RocketDetails';
-
-const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-
-const fetcher = async (url) => {
-  await sleep(3000); 
-  const res = await fetch(url);
-  if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
-  return res.json();
-};
+import useSWR from 'swr';
+import { fetcher } from '@/utils/fetcher'; 
 
 const DataFetchingComponent = () => {
   const [selectedRocketId, setSelectedRocketId] = useState(null);
+
   const { data, error, isLoading } = useSWR(
     'https://api.spacexdata.com/v3/rockets',
-    fetcher,
-    {
-      revalidateOnFocus: false
-    }
+    (url) => fetcher(url, 3000),
+    { revalidateOnFocus: false }
   );
 
   if (isLoading)
-  return (
-    <div className="loading-container">
-      <div className="spinner" />
-      <p>Ładowanie danych...</p>
-    </div>
-  );  
+    return (
+      <div className="fixed top-0 left-0 w-screen h-screen flex flex-col items-center justify-center text-center bg-white">
+        <div className="w-12 h-12 border-4 border-gray-200 border-t-blue-500 rounded-full animate-spin mb-4" />
+        <p className="text-gray-700 text-lg">Ładowanie danych...</p>
+      </div>
+    );
 
-  if (error) return <div style={{ color: 'red' }}>{error}</div>;
+  if (error) return <div className="text-red-500">{error.message}</div>;
 
   return (
-    <div className="rocket-list-container">
-      <h2>Rakiety SpaceX</h2>
-      <ul className="rocket-list">
+    <div className="flex flex-col items-center justify-center min-h-screen w-screen p-8 box-border">
+      <h2 className="text-black-500 text-4xl font-bold mb-4">Rakiety SpaceX</h2>
+      <ul className="grid grid-cols-[repeat(2,300px)] gap-8 justify-center">
         {data.map((rocket) => (
-          <RocketCard key={rocket.rocket_id} rocket={rocket} onClick={(rocket) => setSelectedRocketId(rocket.rocket_id)} />
+          <RocketCard
+            key={rocket.rocket_id}
+            rocket={rocket}
+            onClick={(rocket) => setSelectedRocketId(rocket.rocket_id)}
+          />
         ))}
       </ul>
       {selectedRocketId && (
@@ -52,5 +46,3 @@ const DataFetchingComponent = () => {
 };
 
 export default DataFetchingComponent;
-
-
