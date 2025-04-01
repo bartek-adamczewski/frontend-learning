@@ -1,7 +1,11 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import RocketsList from '*/RocketsList'; 
-import RocketDetailsPage from '*/RocketDetails'; 
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
+import RocketsList from "*/RocketsList";
+import RocketDetailsPage from "*/RocketDetails";
 
 function App() {
   return (
@@ -16,4 +20,3 @@ function App() {
 }
 
 export default App;
-     

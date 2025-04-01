@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
-import RocketCard from './RocketCard';
-import RocketDetails from './RocketDetails';
-import useSWR from 'swr';
-import { fetcher } from '@/utils/fetcher'; 
+import React, { useState } from "react";
+import RocketCard from "./RocketCard";
+import RocketDetails from "./RocketDetails";
+import useSWR from "swr";
+import { fetcher } from "@/utils/fetcher";
 
 const DataFetchingComponent = () => {
   const [selectedRocketId, setSelectedRocketId] = useState(null);
 
   const { data, error, isLoading } = useSWR(
-    'https://api.spacexdata.com/v3/rockets',
+    "https://api.spacexdata.com/v3/rockets",
     (url) => fetcher(url, 3000),
-    { revalidateOnFocus: false }
+    { revalidateOnFocus: false },
   );
 
   if (isLoading)

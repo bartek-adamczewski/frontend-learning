@@ -1,5 +1,4 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 const RocketCard = ({ rocket }) => {
   const navigate = useNavigate();
@@ -24,5 +23,3 @@ const RocketCard = ({ rocket }) => {
 };
 
 export default RocketCard;
-
-
