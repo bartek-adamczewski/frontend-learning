@@ -1,6 +1,7 @@
 import { useParams, useNavigate } from "react-router-dom";
 import useSWR from "swr";
 import { fetcher } from "@/utils/fetcher";
+import { ROCKETS } from "@/constants/routes"; 
 
 const RocketDetailsPage = () => {
   const { rocketName } = useParams();
@@ -24,8 +25,7 @@ const RocketDetailsPage = () => {
       <div className="bg-white rounded-xl shadow-xl max-w-2xl w-full p-6 relative">
         <button
           className="absolute top-2 right-2 text-gray-500 hover:text-red-600 text-2xl font-bold"
-          onClick={() => navigate("/rockets")}
-        >
+          onClick={() => navigate(ROCKETS)}         >
           ×
         </button>
         <h2 className="text-3xl font-bold text-center mb-4 text-black-700">

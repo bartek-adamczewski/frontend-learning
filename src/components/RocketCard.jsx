@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { ROCKETS_LIST } from "@/constants/routes";
 
 const RocketCard = ({ rocket }) => {
   const navigate = useNavigate();
@@ -6,8 +7,8 @@ const RocketCard = ({ rocket }) => {
   return (
     <li
       className="cursor-pointer rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 bg-white"
-      onClick={() => navigate(`/rockets/${rocket.rocket_id}`)}
-    >
+      onClick={() => navigate(ROCKETS_LIST.replace(":rocketName", rocket.rocket_id))}
+      >
       <img
         src={rocket.flickr_images[0]}
         alt={rocket.rocket_name}

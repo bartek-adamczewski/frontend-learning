@@ -1,7 +1,7 @@
 import React, { useState } from "react";
+import useSWR from "swr";
 import RocketCard from "./RocketCard";
 import RocketDetails from "./RocketDetails";
-import useSWR from "swr";
 import { fetcher } from "@/utils/fetcher";
 
 const DataFetchingComponent = () => {
